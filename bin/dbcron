@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+STDERR.sync = STDOUT.sync = true
+
+require "bundler/setup"
+require "dbcron"
+
+usage = "dbcron <dbcron.rb>"
+file = ARGV.shift || abort(usage)
+
+file = "./#{file}" unless file.match(%r{^[\/.]})
+
+require file
+
+DBcron.start
